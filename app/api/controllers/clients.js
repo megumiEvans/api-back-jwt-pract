@@ -10,8 +10,22 @@ var urlClientes = "https://api.mlab.com/api/1/databases/mquezada/collections/Cli
 var clienteMLab = requestjson.createClient(urlClientes)
 
 module.exports = {
- getClients: function(req, res) {
 
+  getById: function(req, res, next) {
+    id = req.params.clientsId
+    let url="https://api.mlab.com/api/1/databases/mquezada/collections/Clientes?q={\"cuenta\":"+id+"}&"+apiKey
+    //https://api.mlab.com/api/1/databases/mquezada/collections/Clientes?q={"cuenta":96}&apiKey=GOLqWa850qO8tsdCUdby6eq9eKPInBkt
+    console.log(req.body);
+    clientMLab = requestjson.createClient(url)
+    clienteMLab.get(req.params.clientId, function(err, clientInfo){
+     if (err) {
+      next(err);
+     } else {
+      res.json({status:"success", message: "Client found!!!", data:{clients: clientInfo}});
+     }
+    });
+   },
+ getClients: function(req, res) {
     clienteMLab.get('', function(err, resM, body) {
           if (err) {
             console.log(body)

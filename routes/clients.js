@@ -27,6 +27,7 @@ router.post('/movements',  auth, function(req, res) {
 
 
 router.get('/movements', auth, clientController.getClients)
+router.get('/:clientId',  auth,clientController.getById);
 router.post('/movements',  auth, clientController.addClient)
 router.delete('/movements/:clientsId',  auth, clientController.deleteClient)
 router.put('/movements/:clientsId',  auth, clientController.editClient)

@@ -10,7 +10,7 @@ module.exports = {
         next(err);
        } else{
         for (let user of users) {
-         usersList.push({id: user._id,
+         usersList.push({id: user._id, idUser: user.idUser,
              name: user.name, lastname: user.lastname,
             email: user.email});
         }
@@ -19,7 +19,7 @@ module.exports = {
        }});
      },
  create: function(req, res, next) {
-   userModel.create({ name: req.body.name, lastname: req.body.lastname, email: req.body.email, password: req.body.password }, function (err, result) {
+   userModel.create({ idUser: req.body.idUser, name: req.body.name, lastname: req.body.lastname, email: req.body.email, password: req.body.password }, function (err, result) {
        if (err) 
         next(err);
        else
@@ -55,7 +55,7 @@ module.exports = {
    });
  },
  updateById: function(req, res, next) {
-   userModel.findByIdAndUpdate(req.params.userId,{name: req.body.name, lastname: req.body.lastname, email: req.body.email}, function(err, userInfo){
+   userModel.findByIdAndUpdate(req.params.userId,{idUser: req.body.idUser, name: req.body.name, lastname: req.body.lastname, email: req.body.email}, function(err, userInfo){
       if(err)
      next(err);
     else {
